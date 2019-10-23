@@ -1,6 +1,7 @@
 <?php
 
-use \Bitrix\Main\Localization\Loc;
+use Bitrix\Main\Localization\Loc;
+use Bitrix\Main\ModuleManager;
 
 Loc::loadMessages(__FILE__);
 
@@ -29,7 +30,7 @@ Class a2c_helper extends CModule
      */
     public function doInstall()
     {
-
+        ModuleManager::registerModule($this->MODULE_ID);
     }
 
     /**
@@ -37,6 +38,6 @@ Class a2c_helper extends CModule
      */
     public function doUninstall()
     {
-
+        ModuleManager::unRegisterModule($this->MODULE_ID);
     }
 }

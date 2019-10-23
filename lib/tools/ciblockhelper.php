@@ -1,9 +1,10 @@
 <?php
 
-namespace a2c\helper\tools;
+namespace A2c\Helper\Tools;
 
 use a2c\helper\traits\Loader;
 use Bitrix\Main\Data\Cache;
+use CIBlockElement;
 
 /**
  * Class CiBlockHelper

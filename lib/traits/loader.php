@@ -1,6 +1,6 @@
 <?php
 
-namespace a2c\helper\traits;
+namespace A2c\Helper\Traits;
 
 use Bitrix\Main\Loader as BxLoader;
 use Bitrix\Main\LoaderException;

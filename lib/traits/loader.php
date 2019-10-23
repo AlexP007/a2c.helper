@@ -12,11 +12,16 @@ use Bitrix\Main\LoaderException;
  * метод-обертку над методом
  * Loader::includeModule
  *
- * @author Alexander Panteleev
- * @package a2c\helper\traits
+ * @author  Alexander Panteleev
+ * @package a2c.helper
  */
 trait Loader
 {
+    /**
+     * @param string $moduleName
+     *
+     * @return void
+     */
     private static function includeModule(string $moduleName)
     {
         try {

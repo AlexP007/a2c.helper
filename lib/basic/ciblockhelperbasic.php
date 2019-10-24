@@ -1,6 +1,6 @@
 <?php
 
-namespace A2c\Helper;
+namespace A2c\Helper\Basic;
 
 use a2c\helper\traits\Loader;
 use Bitrix\Main\Data\Cache;
@@ -35,6 +35,16 @@ abstract class CIBlockHelperBasic
     const MODULE_NAME = 'iblock';
 
     /**
+     * Функция отвечающая за соединение
+     * и выборку из инфоблоков
+     *
+     * @param array $arParams
+     *
+     * @return array
+     */
+    abstract protected static function getData(array $params = array());
+
+    /**
      * Вернет массив с данными из инфоблока
      * При указании $params['CACHE']['ID'],
      * закеэширует резултат
@@ -61,7 +71,13 @@ abstract class CIBlockHelperBasic
 
             if ($cacheManager->startDataCache() ) {
 
-                $result = self::getData($params);
+                $dbResult = static::getData($params);
+
+                // Если что-то пошло не так
+                if (!$dbResult)
+                    $cacheManager->abortDataCache();
+
+                $result = self::prepareData($dbResult);
 
                 $cacheManager->endDataCache($result);
                 // Вернем результат
@@ -69,45 +85,20 @@ abstract class CIBlockHelperBasic
             }
             return false;
         }
-        // Иначagentmacbook
-        //aе просто вернем результат
-        return self::getData($params);
+        // Иначее просто вернем результат
+        $dbResult = static::getData($params);
+        return self::prepareData($dbResult);
     }
 
     /**
-     * Функция отвечающая за соединение
-     * и выборку из инфоблоков
+     * Просто соберет все в массив
      *
-     * @param array $arParams
-     * @param bool $cacheManager
-     *
+     * @param $dbResult
      * @return array
      */
-    private static function getData(array $arParams = array(), $cacheManager = false)
+    private static function prepareData($dbResult)
     {
-        // Определим параметры
-        $order = $arParams['ORDER'] ?: array('SORT' => 'ASC');
-        $filter = $arParams['FILTER'] ?: array();
-        $groupBy = $arParams['GROUP_BY'] ?: false;
-        $navParams = $arParams['NAV_PARAMS'] ?: array();
-        $select = $arParams['SELECT'] ?: array();
-
         $result = array();
-
-        // Получим имя класса с которым рбаотать
-        $class = str_replace('Helper', '',static::class);
-        // Получим объект
-        $dbResult = $class::GetList(
-            $order,
-            $filter,
-            $groupBy,
-            $navParams,
-            $select
-        );
-
-        // Если что-то пошло не так
-        if (!$dbResult && $cacheManager)
-            $cacheManager->abortDataCache();
 
         // Получим данные
         while ($item = $dbResult->GetNext() )

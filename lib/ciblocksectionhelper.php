@@ -22,7 +22,7 @@ class CIBlockSectionHelper extends CIBlockHelperBasic
             // Определим параметры
             $order = $params['ORDER'] ?: array('SORT' => 'ASC');
             $filter = $params['FILTER'] ?: array();
-            $bIncCnt = $params['BINCCNT'] ?: false;
+            $bIncCnt = $params['B_INC_CNT'] ?: false;
             $select = $params['SELECT'] ?: array();
             $navParams = $params['NAV_PARAMS'] ?: array();
 

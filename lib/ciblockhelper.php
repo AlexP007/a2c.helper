@@ -1,6 +1,6 @@
 <?php
 
-namespace A2c\Helper\Tools;
+namespace A2c\Helper;
 
 use a2c\helper\traits\Loader;
 use Bitrix\Main\Data\Cache;
@@ -20,6 +20,16 @@ class CiBlockHelper
 {
     // Подключим трейты
     use Loader;
+
+    /**
+     * Тут будет хранится кэш
+     */
+    const CACHE_DIR = '/a2c_helper_cache';
+
+    /**
+     * Дефолтное время кэширования 1 час
+     */
+    const DEFAULT_TIME = 3600;
 
     /**
      * Подключает инфоблоки
@@ -48,12 +58,11 @@ class CiBlockHelper
 
             $cacheParams = $params['CACHE'];
             $cacheId =  $cacheParams['ID'];
-            $cacheTime = $cacheParams['TIME'] ?: 3600;
-            $cacheDir =  '/a2c_helper_cache';
+            $cacheTime = $cacheParams['TIME'] ?: self::DEFAULT_TIME;
 
             $cacheManager = Cache::createInstance();
 
-            if ($cacheManager->initCache($cacheTime, $cacheId, $cacheDir))
+            if ($cacheManager->initCache($cacheTime, $cacheId, self::CACHE_DIR))
                 return $cacheManager->getVars();
 
             if ($cacheManager->startDataCache() ) {
@@ -66,7 +75,7 @@ class CiBlockHelper
             }
             return false;
         }
-        // Иначе просто вереtм результат
+        // Иначе просто вернем результат
         return self::getData($params);
     }
 

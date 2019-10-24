@@ -75,7 +75,8 @@ class CiBlockHelper
             }
             return false;
         }
-        // Иначе просто вернем результат
+        // Иначagentmacbook
+        //aе просто вернем результат
         return self::getData($params);
     }
 
@@ -113,7 +114,7 @@ class CiBlockHelper
             $cacheManager->abortDataCache();
 
         // Получим данные
-        while ($item = $dbResult->Fetch() )
+        while ($item = $dbResult->GetNext() )
             $result[] = $item;
 
         return $result;

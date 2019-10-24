@@ -22,12 +22,13 @@ trait Loader
      *
      * @return void
      */
-    private static function includeModule(string $moduleName)
+    private static function includeModule()
     {
         try {
-            BxLoader::includeModule($moduleName) or die("something wrong with $moduleName");
+            BxLoader::includeModule(static::MODULE_NAME)
+            or die("something wrong with" . static::MODULE_NAME);
         } catch(LoaderException $e) {
-            die("something wrong with $moduleName");
+            die("something wrong with" . static::MODULE_NAME);
         }
     }
 }

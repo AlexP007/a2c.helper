@@ -2,7 +2,6 @@
 
 namespace A2c\Helper;
 
-use A2c\Helper\Basic\CIBlockHelperBasic;
 use CIBlockElement;
 
 /**

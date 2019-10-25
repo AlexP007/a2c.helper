@@ -1,6 +1,6 @@
 <?php
 
-namespace A2c\Helper\Basic;
+namespace A2c\Helper;
 
 use a2c\helper\traits\Loader;
 use Bitrix\Main\Data\Cache;

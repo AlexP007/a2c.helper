@@ -36,7 +36,7 @@ class HtmlHelper extends HtmlBasic
     {
         $attr = $params['ATTR'] ?? [];
 
-        return "<form" . self::renderAttributes($attr);
+        return "<form" . self::renderAttributes($attr) . '>';
     }
 
     public static function endForm(): string

@@ -39,7 +39,7 @@ abstract class HtmlBasic
             return '';
         }
 
-        return "<$name" . self::renderAttributes($attr) . '>' ;
+        return "<$name" . self::renderAttributes($attr);
     }
 
     private static function endTag(string $name, string $innerHtml): string

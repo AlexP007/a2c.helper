@@ -11,16 +11,21 @@ abstract class HtmlBasic
     protected static function getParams(array $params): array
     {
         $attr = $params['ATTR'] ?? [];
+
+        if ($params['ID']) {
+            $attr['ID'] = $params['ID'];
+        }
+        if ($params['FOR']) {
+            $attr['FOR'] = $params['FOR'];
+        }
+        if ($params['CLASS']) {
+            $attr['ID'] = $params['CLASS'];
+        }
+
+        $label = $params['LABEL'] ?? [];
         $innerHtml = $params['INNER_HTML'] ?? '';
 
-        return [$innerHtml, $attr];
-    }
-
-    public static function input(array $params): string
-    {
-        [$innerHtml, $attr] = self::getParams($params);
-
-        return self::renderElement('input', $innerHtml, $attr);
+        return [$innerHtml, $attr, $label];
     }
 
     public static function renderElement(string $name, string $innerHtml, array $attr): string

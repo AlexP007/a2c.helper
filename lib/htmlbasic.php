@@ -56,9 +56,8 @@ abstract class HtmlBasic
 
         foreach ($attr as $key => $val) {
             $attribute = strtolower($key);
-            $value = strtolower($val);
 
-            $result .= "$attribute=\"$value\"";
+            $result .= "$attribute=\"$val\"";
         }
 
         return $result;

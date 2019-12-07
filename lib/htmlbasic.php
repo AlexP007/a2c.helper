@@ -34,7 +34,7 @@ abstract class HtmlBasic
             return '';
         }
 
-        return "<$name" . self::renderAttributes($attr);
+        return "<$name" . self::renderAttributes($attr) . '>' ;
     }
 
     private static function endTag(string $name): string
@@ -46,9 +46,13 @@ abstract class HtmlBasic
         return "</$name>";
     }
 
-    private static function renderAttributes(array $attr): string
+    protected static function renderAttributes(array $attr): string
     {
-        $result = '';
+        if (empty($attr) ) {
+            return '';
+        }
+
+        $result = ' ';
 
         foreach ($attr as $key => $val) {
             $attribute = strtolower($key);

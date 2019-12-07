@@ -30,7 +30,7 @@ abstract class HtmlBasic
 
     public static function renderElement(string $name, string $innerHtml, array $attr): string
     {
-        return  self::beginTag($name, $attr) . $innerHtml . self::endTag($name);
+        return  self::beginTag($name, $attr) . self::endTag($name, $innerHtml);
     }
 
     private static function beginTag(string $name, array $attr): string
@@ -42,13 +42,13 @@ abstract class HtmlBasic
         return "<$name" . self::renderAttributes($attr) . '>' ;
     }
 
-    private static function endTag(string $name): string
+    private static function endTag(string $name, string $innerHtml): string
     {
         if (in_array($name, self::$voidElements) ) {
             return '>';
         }
 
-        return "</$name>";
+        return "$innerHtml</$name>";
     }
 
     protected static function renderAttributes(array $attr): string

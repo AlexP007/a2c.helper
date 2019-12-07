@@ -48,7 +48,7 @@ abstract class HtmlBasic
             return '>';
         }
 
-        return "$innerHtml</$name>";
+        return ">$innerHtml</$name>";
     }
 
     protected static function renderAttributes(array $attr): string

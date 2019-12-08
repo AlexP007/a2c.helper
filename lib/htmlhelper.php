@@ -57,7 +57,14 @@ class HtmlHelper extends HtmlBasic
             $lastKey = key(array_slice($params['OPTIONS'], -1, 1, true));
 
             foreach ($params['OPTIONS'] as $key => $val) {
-                $params['INNER_HTML'] .= self::option(['INNER_HTML' => $val, 'ATTR' => ['VALUE' => $key]] );
+                $attr = ['VALUE' => $key];
+
+                if (isset($params['SELECTED']) && intval($key) === intval($params['SELECTED']) ) {
+                    $attr['SELECTED'] = null;
+                }
+
+                $params['INNER_HTML'] .= self::option(['INNER_HTML' => $val, 'ATTR' => $attr] );
+
                 if ($lastKey != $key) {
                     $params['INNER_HTML'] .= "\n";
                 }

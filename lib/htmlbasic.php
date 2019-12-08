@@ -62,7 +62,11 @@ abstract class HtmlBasic
         foreach ($attr as $key => $val) {
             $attribute = strtolower($key);
 
-            $result .= "$attribute=\"$val\"";
+            if (is_null($val) ) {
+                $result .= "$attribute ";
+            } else {
+                $result .= "$attribute=\"$val\" ";
+            }
         }
 
         return $result;

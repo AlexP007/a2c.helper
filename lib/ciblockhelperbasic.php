@@ -87,7 +87,7 @@ abstract class CIBlockHelperBasic
         }
         // Иначее просто вернем результат
         $dbResult = static::getData($params);
-        return self::prepareData($dbResult);
+        return static::prepareData($dbResult);
     }
 
     /**
@@ -96,7 +96,7 @@ abstract class CIBlockHelperBasic
      * @param $dbResult
      * @return array
      */
-    private static function prepareData($dbResult)
+    protected static function prepareData($dbResult)
     {
         $result = array();
 

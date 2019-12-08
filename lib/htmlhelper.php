@@ -38,9 +38,12 @@ class HtmlHelper extends HtmlBasic
         }
 
         if (!empty($params['OPTIONS']) ) {
+            if (!is_array($params['OPTIONS']) ) {
+                throw new ArgumentException(Loc::getMessage('A2C_HELPER_ARRAY_TYPE_EXCEPTION', ['#PARAM#' => 'OPTIONS']));
+            }
             $params['INNER_HTML'] = '';
 
-            if (!empty($params['DEFAULT']) ) {
+            if (isset($params['DEFAULT']) ) {
                 $params['INNER_HTML'] .= self::option([
                     'INNER_HTML' => $params['DEFAULT'],
                     'ATTR' => [
@@ -51,7 +54,7 @@ class HtmlHelper extends HtmlBasic
                 ]);
             }
 
-            $lastKey = array_key_last($params['OPTIONS']);
+            $lastKey = key(array_slice($params['OPTIONS'], -1, 1, true));
 
             foreach ($params['OPTIONS'] as $key => $val) {
                 $params['INNER_HTML'] .= self::option(['INNER_HTML' => $val, 'ATTR' => ['VALUE' => $key]] );
@@ -60,15 +63,16 @@ class HtmlHelper extends HtmlBasic
                 }
             }
         }
+        [$innerHtml, $attr] = self::getParams($params);
 
-        return self::input($params);
+        return self::renderElement('select', $innerHtml, $attr);
     }
 
     private static function option(array $params): string
     {
-        $params['ATTR']['TYPE'] = 'option';
+        [$innerHtml, $attr] = self::getParams($params);
 
-        return self::input($params);
+        return self::renderElement('option', $innerHtml, $attr);
     }
 
     public static function label(array $params): string
@@ -101,7 +105,12 @@ class HtmlHelper extends HtmlBasic
         $result = self::renderElement('input', $innerHtml, $attr);
 
         if (!empty($label) ) {
-            $result .= "\n" . self::label($label);
+            if (isset($label['POSITION'])
+                && $label['POSITION'] === 'BEFORE') {
+                $result = self::label($label) . "\n" . $result;
+            } else {
+                $result .= "\n" . self::label($label);
+            }
         }
 
         return $result;

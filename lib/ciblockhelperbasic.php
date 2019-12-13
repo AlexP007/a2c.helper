@@ -85,8 +85,11 @@ abstract class CIBlockHelperBasic
             }
             return false;
         }
-        // Иначее просто вернем результат
+        // Иначе просто вернем результат
         $dbResult = static::getData($params);
+        if (!$dbResult) {
+            return false;
+        }
         return static::prepareData($dbResult);
     }
 

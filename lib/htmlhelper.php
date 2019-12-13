@@ -122,4 +122,11 @@ class HtmlHelper extends HtmlBasic
 
         return $result;
     }
+
+    public static function a(array $params): string
+    {
+        [$innerHtml, $attr] = self::getParams($params);
+
+        return self::renderElement('a', $innerHtml, $attr);
+    }
 }

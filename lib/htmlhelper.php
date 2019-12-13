@@ -29,6 +29,13 @@ class HtmlHelper extends HtmlBasic
         return self::input($params);
     }
 
+    /**
+     * ['ATTR' => ['NAME' => 'catalog_id'], 'SELECTED' => Options::getCatalog(), 'OPTIONS' => $iBlock,]
+     *
+     * @param array $params
+     * @return string
+     * @throws ArgumentException
+     */
     public static function select(array $params): string
     {
         $params['ATTR']['TYPE'] = 'select';

@@ -53,7 +53,7 @@ abstract class CIBlockHelperBasic
      *
      * @return array|bool
      */
-    public static function fetch(array $params)
+    public static function fetch(array $params): array
     {
         // Подключим нужный модуль
         self::includeModule();
@@ -108,5 +108,15 @@ abstract class CIBlockHelperBasic
             $result[] = $item;
 
         return $result;
+    }
+
+    /**
+     * Обертка над fetch
+     *
+     * @param array $params
+     */
+    public static function fetchOne(array $params): array
+    {
+        return self::fetch($params)[0];
     }
 }

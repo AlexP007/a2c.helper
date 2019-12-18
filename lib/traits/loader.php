@@ -22,7 +22,7 @@ trait Loader
      *
      * @return void
      */
-    private static function includeModule()
+    protected static function includeModule()
     {
         try {
             BxLoader::includeModule(static::MODULE_NAME)

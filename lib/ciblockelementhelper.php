@@ -1,8 +1,8 @@
 <?php
 
+
 namespace A2c\Helper;
 
-use CIBlockElement;
 
 /**
  * Class CiBlockHelper
@@ -26,7 +26,7 @@ class CIBlockElementHelper extends CIBlockHelperBasic
             $select = $params['SELECT'] ?: array();
 
             // вернём объект запроса
-            return CIBlockElement::GetList(
+            return \CIBlockElement::GetList(
                 $order,
                 $filter,
                 $groupBy,
@@ -34,5 +34,30 @@ class CIBlockElementHelper extends CIBlockHelperBasic
                 $select
             );
         }
+    }
+
+    public static function getProperties(string $iblockId, string $eltId, array $codes): array
+    {
+        $propertyCodes = [];
+        //Подготовим запрос
+        foreach ($codes as $code) {
+            $propertyCodes[$code] = 'PROPERTY_' . $code;
+        }
+
+        $resultCodes = self::fetchOne([
+            'FILTER' => ['=IBLOCK_ID' => $iblockId, '=ID' => $eltId],
+            'SELECT' => array_values($propertyCodes),
+        ]);
+
+        $result = [];
+
+        // Соберем нормальный ассоциативный массив code => value
+        foreach ($propertyCodes as $code => $key) {
+            if(!empty($value = $resultCodes[$key . '_VALUE']) ) {
+                $result[$code] = $value;
+            }
+        }
+
+        return $result;
     }
 }

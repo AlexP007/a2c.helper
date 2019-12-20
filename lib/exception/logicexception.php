@@ -4,6 +4,6 @@
 namespace A2c\Helper\Exception;
 
 
-class ArgumentException extends \Exception
+class LogicException extends \Exception
 {
 }

@@ -2,12 +2,16 @@
 
 namespace A2c\Helper;
 
-
-use A2c\Helper\Exception\ArgumentException;
 use Bitrix\Main\Localization\Loc;
+
+use A2c\Helper\Exception\ArgumentException,
+    A2c\Helper\Traits\TypeChecker;
+
+Loc::loadMessages(__FILE__);
 
 class HtmlHelper extends HtmlBasic
 {
+    use TypeChecker;
     public static function submit(array $params): string
     {
         $params['ATTR']['TYPE'] = 'submit';
@@ -45,9 +49,8 @@ class HtmlHelper extends HtmlBasic
         }
 
         if (!empty($params['OPTIONS']) ) {
-            if (!is_array($params['OPTIONS']) ) {
-                throw new ArgumentException(Loc::getMessage('A2C_HELPER_ARRAY_TYPE_EXCEPTION', ['#PARAM#' => 'OPTIONS']));
-            }
+            self::typeArray($params, 'OPTIONS'); // Проверим что массив
+
             $params['INNER_HTML'] = '';
 
             if (isset($params['DEFAULT']) ) {

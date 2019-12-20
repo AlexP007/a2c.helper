@@ -62,11 +62,20 @@ abstract class HtmlBasic
         foreach ($attr as $key => $val) {
             $attribute = strtolower($key);
 
+            if ($key === 'STRING') {
+                continue;
+            }
+
             if (is_null($val) ) {
                 $result .= "$attribute ";
             } else {
                 $result .= "$attribute=\"$val\" ";
             }
+        }
+
+        // Если передали строку с аттрибутами, добавим их
+        if (isset($attr['STRING']) ) {
+            $result .= $attr['STRING'];
         }
 
         return $result;

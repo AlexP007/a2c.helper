@@ -24,8 +24,8 @@ class Collapse extends BasicComponent
         // Этот метод можно вызвать только один раз
         self::ensureLogic(!$this->begin, Loc::getMessage('A2C_HELPER_COMPONENT_METHOD_EXCEPTION', ['#METHOD#' => 'before()']) );
 
-        $this->setId('target');
-        $this->setId('dispatcher');
+        $this->setTargetId();
+        $this->setDispatcherId();
 
         $this->event = $params['EVENT'] ?? 'click';
 //        $this->action = $params['ACTION'] ?? 'toggle';
@@ -87,7 +87,7 @@ class Collapse extends BasicComponent
         <script>
             $('#<?= $dispatcherId ?>').on('<?= $event ?>', function() {
                 $('#<?= $targetId ?>').toggle();
-                <?= $callback ?>
+                !<?= $callback ?>('<?= $targetId ?>', '<?= $dispatcherId ?>')
             });
         </script>
         <?php
@@ -96,12 +96,22 @@ class Collapse extends BasicComponent
 
     }
 
-    public function getDispatcherId()
+    protected function setDispatcherId()
+    {
+        $this->setId('dispatcher');
+    }
+
+    protected function getDispatcherId()
     {
         return $this->getId('dispatcher');
     }
 
-    public function getTargetId()
+    protected function setTargetId()
+    {
+        $this->setId('target');
+    }
+
+    protected function getTargetId()
     {
         return $this->getId('target');
     }

@@ -101,7 +101,7 @@ class Collapse extends BasicComponent
         $this->setId('dispatcher');
     }
 
-    protected function getDispatcherId()
+    public function getDispatcherId()
     {
         return $this->getId('dispatcher');
     }
@@ -111,7 +111,7 @@ class Collapse extends BasicComponent
         $this->setId('target');
     }
 
-    protected function getTargetId()
+    public function getTargetId()
     {
         return $this->getId('target');
     }

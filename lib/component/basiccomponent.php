@@ -51,5 +51,5 @@ abstract class BasicComponent
 
     abstract function begin(array $params);
 
-    abstract function end();
+    abstract function end(): string;
 }

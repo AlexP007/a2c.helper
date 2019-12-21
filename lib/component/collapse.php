@@ -61,7 +61,7 @@ class Collapse extends BasicComponent
         return "id=\"$targetId\"";
     }
 
-    public function end()
+    public function end(): string
     {
         // Этот метод может быть вызван только после begin
         self::ensureLogic($this->target, Loc::getMessage('A2C_HELPER_COMPONENT_METHOD_BEFORE_EXCEPTION', ['#METHOD#' => 'target()']) );

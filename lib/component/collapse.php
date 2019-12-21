@@ -41,8 +41,7 @@ class Collapse extends BasicComponent
 
         $this->dispatcher = true;
 
-        $targetId = $this->getId('target');
-        $dispatcherId = $this->getId('dispatcher');
+        $dispatcherId = $this->getDispatcherId();
 
         return  "id=\"$dispatcherId\"";
     }
@@ -57,7 +56,7 @@ class Collapse extends BasicComponent
 
         $this->target = true;
 
-        $targetId = $this->getId('target');
+        $targetId = $this->getTargetId();
 
         return "id=\"$targetId\"";
     }
@@ -72,8 +71,8 @@ class Collapse extends BasicComponent
 
         $this->end = true;
 
-        $targetId = $this->getId('target');
-        $dispatcherId = $this->getId('dispatcher');
+        $targetId = $this->getTargetId();
+        $dispatcherId = $this->getDispatcherId();
 
         $event = $this->event;
 
@@ -90,5 +89,15 @@ class Collapse extends BasicComponent
         <?php
 
         return ob_get_clean();
+    }
+
+    public function getDispatcherId()
+    {
+        return $this->getId('dispatcher');
+    }
+
+    public function getTargetId()
+    {
+        return $this->getId('target');
     }
 }

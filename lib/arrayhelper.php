@@ -22,12 +22,15 @@ class ArrayHelper
             if (array_key_exists($key1, $item) && is_array($key2) ) {
                 $result[$item[$key1]] = array();
 
-                foreach ($key2 as $key) {
-                    if (array_key_exists($key, $item) ) {
-                        array_push($result[$item[$key1]], $item[$key]);
+                if (empty($key2) ) {
+                    $result[$item[$key1]] = $item;
+                } else {
+                    foreach ($key2 as $key) {
+                        if (array_key_exists($key, $item)) {
+                            array_push($result[$item[$key1]], $item[$key]);
+                        }
                     }
                 }
-
             } elseif (array_key_exists($key1, $item) && array_key_exists($key2, $item) ) {
                 $result[$item[$key1]] = $item[$key2];
             }

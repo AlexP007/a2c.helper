@@ -117,6 +117,6 @@ abstract class CIBlockHelperBasic
      */
     public static function fetchOne(array $params): array
     {
-        return self::fetch($params)[0];
+        return self::fetch($params)[0] ?? array();
     }
 }

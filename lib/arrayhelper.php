@@ -18,12 +18,11 @@ class ArrayHelper
                 new ArgumentException(Loc::getMessage('A2C_HELPER_ARRAY_EXCEPTIONS') );
             }
 
-            if (!isset($result[$item[$key1]]) ) {
-                $result[$item[$key1]] = array();
-            }
-
             // Если второй ключ это массив
             if (array_key_exists($key1, $item) && is_array($key2) ) {
+                if (!isset($result[$item[$key1]]) ) {
+                    $result[$item[$key1]] = array();
+                }
 
                 if (empty($key2) ) {
                     array_push($result[$item[$key1]], $item);

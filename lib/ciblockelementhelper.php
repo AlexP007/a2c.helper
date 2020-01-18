@@ -60,4 +60,12 @@ class CIBlockElementHelper extends CIBlockHelperBasic
 
         return $result;
     }
+
+    public static function subQuery($field, $filter)
+    {
+        // Подключим нужный модуль
+        self::includeModule();
+
+        return \CIBlockElement::SubQuery($field, $filter);
+    }
 }

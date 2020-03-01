@@ -8,7 +8,7 @@ use Bitrix\Main\Web\Cookie,
 
 class Flash
 {
-    const PREFIX = 'A2C_HELPER_FLASH';
+    const PREFIX = 'A2C_HELPER_FLASH_';
 
     /**
      * Устанавливает флэш сообщение
@@ -21,7 +21,7 @@ class Flash
     public static function set(string $name, string $value): bool
     {
         $cookie = new Cookie(self::PREFIX . $name, $value, time() + 1);
-
+        $cookie->setPath('/');
         Application::getInstance()->getContext()->getResponse()->addCookie($cookie);
 
         return true;
